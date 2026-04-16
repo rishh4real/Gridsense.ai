@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GridSense — AI Event Intelligence Platform</title>
+  <meta name="description" content="GridSense is an AI-powered real-time event intelligence platform that transforms physical events into smart, safe, and seamless experiences using Claude AI." />
+  <meta property="og:title" content="GridSense — AI Event Intelligence Platform" />
+  <meta property="og:description" content="Crowd safety, smart queues, event assistance, and prompt battles — all in one unified AI system." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════ NAV ═══════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo" aria-label="GridSense Home">
+        <div class="logo-icon">
+          <svg width="36" height="36" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="60" height="60" rx="12" fill="#0f172a"/>
+            <line x1="15" y1="24" x2="45" y2="24" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+            <line x1="15" y1="30" x2="45" y2="30" stroke="#3b82f6" stroke-width="1.5" opacity="0.7"/>
+            <line x1="15" y1="36" x2="45" y2="36" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+            <line x1="22" y1="15" x2="22" y2="45" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+            <line x1="30" y1="15" x2="30" y2="45" stroke="#3b82f6" stroke-width="1.5" opacity="0.7"/>
+            <line x1="38" y1="15" x2="38" y2="45" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+            <circle cx="22" cy="24" r="2" fill="#3b82f6"/>
+            <circle cx="30" cy="24" r="2" fill="#3b82f6"/>
+            <circle cx="38" cy="24" r="2" fill="#3b82f6"/>
+            <circle cx="22" cy="36" r="2" fill="#3b82f6"/>
+            <circle cx="38" cy="36" r="2" fill="#3b82f6"/>
+            <circle cx="22" cy="36" r="2" fill="#3b82f6"/>
+            <circle cx="30" cy="36" r="2" fill="#3b82f6"/>
+            <circle cx="38" cy="36" r="2" fill="#3b82f6"/>
+            <circle cx="30" cy="30" r="6" fill="#f59e0b"/>
+            <circle cx="30" cy="30" r="10" fill="none" stroke="#f59e0b" stroke-width="1.5" opacity="0.5"/>
+          </svg>
+        </div>
+        <span class="logo-text"><span class="logo-g">G</span>ridSense</span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#modules" class="nav-link">Modules</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#demo" class="nav-link">Live Demo</a>
+        <a href="#technology" class="nav-link">Technology</a>
+      </div>
+      <div class="nav-actions">
+        <a href="#demo" class="btn-primary" id="nav-cta">Try Live Demo</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="grid-canvas" id="grid-canvas"></div>
+      <div class="hero-glow glow-1"></div>
+      <div class="hero-glow glow-2"></div>
+      <div class="hero-glow glow-3"></div>
+      <div class="particles" id="particles"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span>Powered by Claude AI</span>
+      </div>
+      <h1 class="hero-title">
+        Turn Chaos Into<br/>
+        <span class="gradient-text">Command</span>
+      </h1>
+      <p class="hero-subtitle">
+        GridSense is the AI-powered real-time event intelligence platform that transforms how you manage physical events — from crowd safety to seamless attendee experiences.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num" data-count="4">0</span>
+          <span class="stat-label">AI Modules</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" data-count="99">0</span><span class="stat-num-suffix">%</span>
+          <span class="stat-label">Accuracy</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" data-count="0" data-target="<1">0</span>
+          <span class="stat-label" style="white-space:nowrap">&lt;1s Response</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#demo" class="btn-hero-primary" id="hero-cta-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>
+          Explore Platform
+        </a>
+        <a href="#how-it-works" class="btn-hero-secondary" id="hero-cta-secondary">
+          How It Works
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+      <div class="hero-scroll-hint">
+        <div class="scroll-indicator">
+          <div class="scroll-dot"></div>
+        </div>
+        <span>Scroll to explore</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="dashboard-preview" id="dashboard-preview">
+        <div class="dp-header">
+          <div class="dp-dots">
+            <span class="dp-dot red"></span>
+            <span class="dp-dot yellow"></span>
+            <span class="dp-dot green"></span>
+          </div>
+          <span class="dp-title">GridSense Command Center</span>
+          <div class="dp-live">
+            <span class="live-dot"></span> LIVE
+          </div>
+        </div>
+        <div class="dp-body">
+          <div class="dp-metric">
+            <span class="dp-metric-label">Crowd Density</span>
+            <div class="dp-bar-wrap"><div class="dp-bar bar-orange" style="width:72%"></div></div>
+            <span class="dp-metric-val orange">72%</span>
+          </div>
+          <div class="dp-metric">
+            <span class="dp-metric-label">Gate A Queue</span>
+            <div class="dp-bar-wrap"><div class="dp-bar bar-red" style="width:91%"></div></div>
+            <span class="dp-metric-val red">91%</span>
+          </div>
+          <div class="dp-metric">
+            <span class="dp-metric-label">Gate B Queue</span>
+            <div class="dp-bar-wrap"><div class="dp-bar bar-green" style="width:34%"></div></div>
+            <span class="dp-metric-val green">34%</span>
+          </div>
+          <div class="dp-metric">
+            <span class="dp-metric-label">AI Responses</span>
+            <div class="dp-bar-wrap"><div class="dp-bar bar-blue" style="width:100%"></div></div>
+            <span class="dp-metric-val blue">1,247</span>
+          </div>
+          <div class="dp-alert">
+            <span class="alert-icon">⚠</span>
+            <div>
+              <strong>AI Alert:</strong> Gate A overflow detected<br/>
+              <small>Redirecting 340 attendees → Gate B &amp; C</small>
+            </div>
+          </div>
+          <div class="dp-ai-badge">
+            <span>🤖 Claude AI Active</span>
+            <span class="ai-pulse"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ MARQUEE ═══════════════════ -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>Crowd Safety</span><span class="marquee-dot">✦</span>
+      <span>Smart Queues</span><span class="marquee-dot">✦</span>
+      <span>Event Assistant</span><span class="marquee-dot">✦</span>
+      <span>Prompt Battle Arena</span><span class="marquee-dot">✦</span>
+      <span>Real-time Intelligence</span><span class="marquee-dot">✦</span>
+      <span>Claude AI Core</span><span class="marquee-dot">✦</span>
+      <span>Panic Detection</span><span class="marquee-dot">✦</span>
+      <span>Navigation AI</span><span class="marquee-dot">✦</span>
+      <!-- Duplicate for seamless loop -->
+      <span>Crowd Safety</span><span class="marquee-dot">✦</span>
+      <span>Smart Queues</span><span class="marquee-dot">✦</span>
+      <span>Event Assistant</span><span class="marquee-dot">✦</span>
+      <span>Prompt Battle Arena</span><span class="marquee-dot">✦</span>
+      <span>Real-time Intelligence</span><span class="marquee-dot">✦</span>
+      <span>Claude AI Core</span><span class="marquee-dot">✦</span>
+      <span>Panic Detection</span><span class="marquee-dot">✦</span>
+      <span>Navigation AI</span><span class="marquee-dot">✦</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ FEATURES ═══════════════════ -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Core Capabilities</div>
+        <h2 class="section-title">Four AI Modules.<br/>One Unified Platform.</h2>
+        <p class="section-sub">GridSense combines four specialized AI capabilities that work in concert to deliver complete event intelligence — from physical safety to digital engagement.</p>
+      </div>
+      <div class="features-grid">
+
+        <!-- Card 1 -->
+        <div class="feature-card" id="feature-safety" data-module="safety">
+          <div class="feature-card-glow glow-orange"></div>
+          <div class="feature-icon-wrap icon-orange">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <div class="feature-tag tag-orange">Safety Module</div>
+          <h3 class="feature-title">Crowd Safety Analyzer</h3>
+          <p class="feature-desc">Detects overcrowding zones and panic signals from voice or text reports in real time. AI extracts structured insights to trigger immediate safety protocols.</p>
+          <div class="feature-chips">
+            <span class="chip chip-orange">Panic Detection</span>
+            <span class="chip chip-orange">Zone Mapping</span>
+            <span class="chip chip-orange">Live Alerts</span>
+          </div>
+          <div class="feature-stat">
+            <span class="fstat-num">98%</span>
+            <span class="fstat-label">Detection accuracy</span>
+          </div>
+          <a href="#demo" class="feature-link" id="feature-safety-link">Try Safety Demo →</a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="feature-card" id="feature-assistant" data-module="assistant">
+          <div class="feature-card-glow glow-blue"></div>
+          <div class="feature-icon-wrap icon-blue">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              <path d="M8 10h8M8 14h4"/>
+            </svg>
+          </div>
+          <div class="feature-tag tag-blue">Assistant Module</div>
+          <h3 class="feature-title">Event Assistant AI</h3>
+          <p class="feature-desc">Answers attendee queries instantly and suggests optimized navigation paths. Context-aware intelligence reduces confusion and improves flow across venues.</p>
+          <div class="feature-chips">
+            <span class="chip chip-blue">Q&amp;A Engine</span>
+            <span class="chip chip-blue">Navigation AI</span>
+            <span class="chip chip-blue">Multi-language</span>
+          </div>
+          <div class="feature-stat">
+            <span class="fstat-num">&lt;1s</span>
+            <span class="fstat-label">Response time</span>
+          </div>
+          <a href="#demo" class="feature-link" id="feature-assistant-link">Try Assistant Demo →</a>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="feature-card" id="feature-queue" data-module="queue">
+          <div class="feature-card-glow glow-cyan"></div>
+          <div class="feature-icon-wrap icon-cyan">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <path d="M14 14h7v7h-7z" stroke-dasharray="2 2"/>
+              <path d="M17.5 14v7M14 17.5h7" opacity="0.4"/>
+            </svg>
+          </div>
+          <div class="feature-tag tag-cyan">Queue Module</div>
+          <h3 class="feature-title">Smart Queue Manager</h3>
+          <p class="feature-desc">Dynamically redistributes crowd flow across gates and counters based on real-time density analytics. Eliminates bottlenecks before they form.</p>
+          <div class="feature-chips">
+            <span class="chip chip-cyan">Flow Balancing</span>
+            <span class="chip chip-cyan">Gate Control</span>
+            <span class="chip chip-cyan">Predictive AI</span>
+          </div>
+          <div class="feature-stat">
+            <span class="fstat-num">60%</span>
+            <span class="fstat-label">Wait time reduction</span>
+          </div>
+          <a href="#demo" class="feature-link" id="feature-queue-link">Try Queue Demo →</a>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="feature-card feature-card-wide" id="feature-battle" data-module="battle">
+          <div class="feature-card-glow glow-purple"></div>
+          <div class="feature-icon-wrap icon-purple">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+            </svg>
+          </div>
+          <div class="feature-tag tag-purple">Arena Module</div>
+          <h3 class="feature-title">Prompt Battle Arena</h3>
+          <p class="feature-desc">
+            A one-of-a-kind attendee engagement module where participants compete on prompt engineering challenges in real time. Attendees craft AI prompts, submit their entries, and a live leaderboard tracks rankings scored by Claude AI — turning the event itself into an interactive playground for AI creativity.
+          </p>
+          <div class="feature-chips">
+            <span class="chip chip-purple">Live Leaderboard</span>
+            <span class="chip chip-purple">AI Judging</span>
+            <span class="chip chip-purple">Real-time Scoring</span>
+            <span class="chip chip-purple">Audience Engagement</span>
+          </div>
+          <div class="feature-stat">
+            <span class="fstat-num">∞</span>
+            <span class="fstat-label">Concurrent players</span>
+          </div>
+          <a href="#demo" class="feature-link" id="feature-battle-link">Try Prompt Battle →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ HOW IT WORKS ═══════════════════ -->
+  <section class="how-section" id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">The Intelligence Pipeline</div>
+        <h2 class="section-title">Noise In. Action Out.</h2>
+        <p class="section-sub">GridSense uses Claude AI to extract structured intelligence from raw, unstructured human input — transforming every report, query, and signal into decisive action.</p>
+      </div>
+      <div class="pipeline">
+        <div class="pipeline-step" id="step-1">
+          <div class="step-number">01</div>
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/>
+            </svg>
+          </div>
+          <h3>Raw Input</h3>
+          <p>Voice reports, text messages, form submissions, and real-time signals flow into GridSense from multiple channels.</p>
+          <div class="step-connector"></div>
+        </div>
+        <div class="pipeline-step" id="step-2">
+          <div class="step-number">02</div>
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 8v4l3 3"/>
+            </svg>
+          </div>
+          <h3>Claude AI Processing</h3>
+          <p>Claude AI parses unstructured input, identifies patterns, extracts urgency levels, locations, and required actions.</p>
+          <div class="step-connector"></div>
+        </div>
+        <div class="pipeline-step" id="step-3">
+          <div class="step-number">03</div>
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/>
+            </svg>
+          </div>
+          <h3>Structured Intelligence</h3>
+          <p>Raw noise becomes structured JSON data — organized by module, priority, location, and recommended action.</p>
+          <div class="step-connector"></div>
+        </div>
+        <div class="pipeline-step" id="step-4">
+          <div class="step-number">04</div>
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <h3>Instant Action</h3>
+          <p>Alerts fire, queues reroute, navigation updates, and the platform responds — all in under one second.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ MODULES (DETAILED) ═══════════════════ -->
+  <section class="modules-section" id="modules">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Deep Dive</div>
+        <h2 class="section-title">Inside Each Module</h2>
+      </div>
+
+      <!-- Module 1: Safety -->
+      <div class="module-row" id="module-safety-row">
+        <div class="module-content">
+          <div class="module-tag tag-orange">01 / Safety</div>
+          <h3 class="module-title">Crowd Safety Analyzer</h3>
+          <p class="module-desc">When someone reports "it's getting really crowded near Stage B" or "there's pushing happening," GridSense doesn't just log it — it extracts structured intelligence: location, severity, panic probability, and recommended action.</p>
+          <ul class="module-points">
+            <li><span class="point-icon orange">→</span> Parses voice-to-text and typed reports with NLP</li>
+            <li><span class="point-icon orange">→</span> Classifies urgency from 1–5 with confidence scores</li>
+            <li><span class="point-icon orange">→</span> Maps incidents to venue grid coordinates</li>
+            <li><span class="point-icon orange">→</span> Auto-triggers evacuation or redirect protocols</li>
+          </ul>
+        </div>
+        <div class="module-visual">
+          <div class="module-demo-window" id="safety-demo-window">
+            <div class="demo-label">AI Safety Analysis</div>
+            <div class="demo-input-mock">
+              <span class="dim">Report:</span> "People are pushing near Gate B entrance, I can't move!"
+            </div>
+            <div class="demo-output">
+              <div class="demo-json">
+                <pre><code id="safety-json">{
+  "<span class="jk">module</span>": "<span class="jv">crowd_safety</span>",
+  "<span class="jk">location</span>": "<span class="jv">Gate B Entrance</span>",
+  "<span class="jk">severity</span>": <span class="jn">4</span>,
+  "<span class="jk">panic_score</span>": <span class="jn">0.82</span>,
+  "<span class="jk">crowd_density</span>": "<span class="jv">critical</span>",
+  "<span class="jk">action</span>": "<span class="jv">IMMEDIATE_REDIRECT</span>",
+  "<span class="jk">alternate_route</span>": "<span class="jv">Gate A via North Path</span>"
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 2: Assistant -->
+      <div class="module-row module-row-reverse" id="module-assistant-row">
+        <div class="module-content">
+          <div class="module-tag tag-blue">02 / Assistant</div>
+          <h3 class="module-title">Event Assistant AI</h3>
+          <p class="module-desc">Attendees ask questions in plain language — "Where's the main stage?", "What time does Session 3 start?", "What's the shortest route to the food court?" — and receive instant, context-aware answers with venue-specific navigation.</p>
+          <ul class="module-points">
+            <li><span class="point-icon blue">→</span> Trained on event schedules, maps, and FAQs</li>
+            <li><span class="point-icon blue">→</span> Provides step-by-step navigation paths</li>
+            <li><span class="point-icon blue">→</span> Considers real-time crowd density for routing</li>
+            <li><span class="point-icon blue">→</span> Supports multi-language queries</li>
+          </ul>
+        </div>
+        <div class="module-visual">
+          <div class="module-demo-window chat-demo" id="assistant-demo-window">
+            <div class="demo-label">Event Assistant Chat</div>
+            <div class="chat-messages" id="chat-messages">
+              <div class="chat-msg user">Where's the fastest way to the food court?</div>
+              <div class="chat-msg bot">
+                <span class="bot-icon">🤖</span>
+                <span>The quickest route is via <strong>North Corridor → Level 2 → Zone D</strong>. Note: Gate B area is currently congested (72%). East Entrance has clear flow right now!</span>
+              </div>
+              <div class="chat-msg user">What time does the keynote start?</div>
+              <div class="chat-msg bot">
+                <span class="bot-icon">🤖</span>
+                <span>The Keynote begins at <strong>3:30 PM</strong> on the Main Stage (Hall A). I recommend arriving 15 minutes early — seating is first-come. Want navigation to Hall A?</span>
+              </div>
+            </div>
+            <div class="chat-input-wrap">
+              <input type="text" class="chat-input" id="chat-input" placeholder="Ask anything about the event..." />
+              <button class="chat-send" id="chat-send">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Module 3: Queue -->
+      <div class="module-row" id="module-queue-row">
+        <div class="module-content">
+          <div class="module-tag tag-cyan">03 / Queue</div>
+          <h3 class="module-title">Smart Queue Manager</h3>
+          <p class="module-desc">Real-time crowd flow redistribution across gates, counters, and checkpoints. The AI continuously monitors density gradients and proactively balances load before lines form.</p>
+          <ul class="module-points">
+            <li><span class="point-icon cyan">→</span> Monitors all entry/exit points simultaneously</li>
+            <li><span class="point-icon cyan">→</span> Predicts overflow 8–10 minutes in advance</li>
+            <li><span class="point-icon cyan">→</span> Issues dynamic redirect messages to attendees</li>
+            <li><span class="point-icon cyan">→</span> Integrates with PA system and signage</li>
+          </ul>
+        </div>
+        <div class="module-visual">
+          <div class="queue-dashboard" id="queue-dashboard">
+            <div class="demo-label">Queue Intelligence Dashboard</div>
+            <div class="queue-gates">
+              <div class="q-gate" id="q-gate-a">
+                <div class="q-gate-header">
+                  <span class="q-gate-name">Gate A</span>
+                  <span class="q-status-badge critical">Critical</span>
+                </div>
+                <div class="q-bar-outer"><div class="q-bar-inner" id="qb-a" style="width:91%"></div></div>
+                <div class="q-meta"><span>~340 people</span><span class="red">91% capacity</span></div>
+              </div>
+              <div class="q-gate" id="q-gate-b">
+                <div class="q-gate-header">
+                  <span class="q-gate-name">Gate B</span>
+                  <span class="q-status-badge moderate">Moderate</span>
+                </div>
+                <div class="q-bar-outer"><div class="q-bar-inner bar-yellow" id="qb-b" style="width:54%"></div></div>
+                <div class="q-meta"><span>~189 people</span><span class="yellow">54% capacity</span></div>
+              </div>
+              <div class="q-gate" id="q-gate-c">
+                <div class="q-gate-header">
+                  <span class="q-gate-name">Gate C</span>
+                  <span class="q-status-badge clear">Clear</span>
+                </div>
+                <div class="q-bar-outer"><div class="q-bar-inner bar-green-q" id="qb-c" style="width:22%"></div></div>
+                <div class="q-meta"><span>~78 people</span><span class="green">22% capacity</span></div>
+              </div>
+            </div>
+            <div class="ai-action-box">
+              <span>🤖 <strong>AI Action:</strong> Redirecting Gate A overflow → Gate C via signage &amp; announcements</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════ DEMO / BATTLE ARENA ═══════════════════ -->
+  <section class="arena-section" id="demo">
+    <div class="arena-bg">
+      <div class="arena-glow"></div>
+    </div>
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag tag-purple-text">Live Demo</div>
+        <h2 class="section-title">⚔️ Prompt Battle Arena</h2>
+        <p class="section-sub">Submit your best AI prompt. Compete live. ClaudeAI scores every entry on creativity, specificity, and impact. Watch the leaderboard shift in real time.</p>
+      </div>
+
+      <div class="arena-layout">
+        <div class="arena-submit">
+          <div class="arena-card" id="arena-card">
+            <h3 class="arena-challenge-title">
+              <span class="challenge-icon">🎯</span> Today's Challenge
+            </h3>
+            <div class="challenge-box" id="challenge-box">
+              <p><strong>Topic:</strong> Crowd Management</p>
+              <p>Write a prompt that would help an AI system detect and respond to a crowd emergency at a music festival most effectively.</p>
+            </div>
+            <div class="arena-form">
+              <label for="player-name">Your Name / Handle</label>
+              <input type="text" id="player-name" class="arena-input" placeholder="e.g. PromptMaster99" maxlength="30" />
+              <label for="prompt-input">Your Prompt</label>
+              <textarea id="prompt-input" class="arena-textarea" placeholder="Craft your best prompt here. Think: context, constraints, output format, edge cases..." rows="5" maxlength="500"></textarea>
+              <div class="char-count"><span id="char-count">0</span>/500</div>
+              <button class="btn-arena-submit" id="submit-prompt">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                Submit to Arena
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="arena-leaderboard">
+          <div class="leaderboard-card" id="leaderboard-card">
+            <div class="lb-header">
+              <h3>🏆 Live Leaderboard</h3>
+              <div class="lb-live">
+                <span class="live-dot"></span> Real-time
+              </div>
+            </div>
+            <div class="lb-list" id="lb-list">
+              <div class="lb-item rank-1">
+                <span class="lb-rank">🥇</span>
+                <div class="lb-info">
+                  <span class="lb-name">NeuralNomad</span>
+                  <span class="lb-prompt-preview">"Act as emergency coordinator with... "</span>
+                </div>
+                <div class="lb-score-wrap">
+                  <span class="lb-score">97</span>
+                  <div class="score-bar" style="--score: 97%"></div>
+                </div>
+              </div>
+              <div class="lb-item rank-2">
+                <span class="lb-rank">🥈</span>
+                <div class="lb-info">
+                  <span class="lb-name">PromptWizard</span>
+                  <span class="lb-prompt-preview">"You are a safety AI. Analyze..."</span>
+                </div>
+                <div class="lb-score-wrap">
+                  <span class="lb-score">91</span>
+                  <div class="score-bar" style="--score: 91%"></div>
+                </div>
+              </div>
+              <div class="lb-item rank-3">
+                <span class="lb-rank">🥉</span>
+                <div class="lb-info">
+                  <span class="lb-name">AIAlchemist</span>
+                  <span class="lb-prompt-preview">"Step 1: Identify severity. Step 2..."</span>
+                </div>
+                <div class="lb-score-wrap">
+                  <span class="lb-score">88</span>
+                  <div class="score-bar" style="--score: 88%"></div>
+                </div>
+              </div>
+              <div class="lb-item">
+                <span class="lb-rank">4</span>
+                <div class="lb-info">
+                  <span class="lb-name">ByteShaman</span>
+                  <span class="lb-prompt-preview">"Evaluate crowd density using..."</span>
+                </div>
+                <div class="lb-score-wrap">
+                  <span class="lb-score">84</span>
+                  <div class="score-bar" style="--score: 84%"></div>
+                </div>
+              </div>
+              <div class="lb-item">
+                <span class="lb-rank">5</span>
+                <div class="lb-info">
+                  <span class="lb-name">CodeCraft</span>
+                  <span class="lb-prompt-preview">"Given a crowd report, output..."</span>
+                </div>
+                <div class="lb-score-wrap">
+                  <span class="lb-score">79</span>
+                  <div class="score-bar" style="--score: 79%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="lb-footer">
+              <span id="entry-count">127 entries submitted</span>
+              <button class="lb-refresh" id="lb-refresh">↻ Refresh</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TECHNOLOGY ═══════════════════ -->
+  <section class="tech-section" id="technology">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Under the Hood</div>
+        <h2 class="section-title">Built on Claude AI</h2>
+        <p class="section-sub">GridSense uses Anthropic's Claude at its core — the most capable AI for understanding nuanced human language and producing structured, actionable outputs.</p>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-card" id="tech-claude">
+          <div class="tech-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 8v4l3 3"/>
+            </svg>
+          </div>
+          <h4>Claude AI</h4>
+          <p>Powers natural language understanding, sentiment analysis, structured extraction, and response generation across all four modules.</p>
+        </div>
+        <div class="tech-card" id="tech-rt">
+          <div class="tech-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <h4>Real-time Pipeline</h4>
+          <p>Sub-second processing from input to action. Every report, query, and signal routes through the AI pipeline in milliseconds.</p>
+        </div>
+        <div class="tech-card" id="tech-struct">
+          <div class="tech-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+          <h4>Structured Extraction</h4>
+          <p>Unstructured inputs — voice, text, emoji, slang — are parsed into clean JSON with location, severity, category, and action fields.</p>
+        </div>
+        <div class="tech-card" id="tech-multi">
+          <div class="tech-icon">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <h4>Multi-modal Input</h4>
+          <p>Accepts voice transcriptions, typed messages, form data, and API webhooks — all processed through the same intelligent core.</p>
+        </div>
+      </div>
+      <div class="tech-quote">
+        <div class="tq-inner">
+          <div class="tq-icon">💬</div>
+          <blockquote>"GridSense turns noise into action, and chaos into command — by making Claude AI the brain of every physical event."</blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ CTA ═══════════════════ -->
+  <section class="cta-section" id="cta">
+    <div class="cta-bg">
+      <div class="cta-glow"></div>
+    </div>
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-badge">Ready to Deploy?</div>
+        <h2 class="cta-title">Make Your Next Event<br/>Truly Intelligent</h2>
+        <p class="cta-sub">GridSense is the command layer your event has been missing. Deploy all four AI modules at your next event and experience the difference.</p>
+        <div class="cta-actions">
+          <a href="#demo" class="btn-cta-primary" id="cta-primary">Start Free Demo</a>
+          <a href="#features" class="btn-cta-secondary" id="cta-secondary">Explore Features</a>
+        </div>
+        <div class="cta-security">
+          <span>🔒 Built with Anthropic Claude AI</span>
+          <span>·</span>
+          <span>🛡️ Real-time Safety</span>
+          <span>·</span>
+          <span>⚡ Sub-second Response</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#home" class="nav-logo footer-logo" aria-label="GridSense">
+            <div class="logo-icon">
+              <svg width="32" height="32" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="60" height="60" rx="12" fill="#0f172a"/>
+                <line x1="15" y1="24" x2="45" y2="24" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+                <line x1="15" y1="30" x2="45" y2="30" stroke="#3b82f6" stroke-width="1.5" opacity="0.7"/>
+                <line x1="15" y1="36" x2="45" y2="36" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+                <line x1="22" y1="15" x2="22" y2="45" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+                <line x1="30" y1="15" x2="30" y2="45" stroke="#3b82f6" stroke-width="1.5" opacity="0.7"/>
+                <line x1="38" y1="15" x2="38" y2="45" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+                <circle cx="30" cy="30" r="6" fill="#f59e0b"/>
+                <circle cx="30" cy="30" r="10" fill="none" stroke="#f59e0b" stroke-width="1.5" opacity="0.5"/>
+              </svg>
+            </div>
+            <span class="logo-text"><span class="logo-g">G</span>ridSense</span>
+          </a>
+          <p class="footer-tagline">AI Event Intelligence Platform.<br/>Powered by Claude AI.</p>
+        </div>
+        <div class="footer-links-group">
+          <div class="footer-col">
+            <h5>Platform</h5>
+            <a href="#features">Features</a>
+            <a href="#modules">Modules</a>
+            <a href="#demo">Live Demo</a>
+            <a href="#technology">Technology</a>
+          </div>
+          <div class="footer-col">
+            <h5>Modules</h5>
+            <a href="#feature-safety">Crowd Safety</a>
+            <a href="#feature-assistant">Event Assistant</a>
+            <a href="#feature-queue">Smart Queue</a>
+            <a href="#feature-battle">Prompt Arena</a>
+          </div>
+          <div class="footer-col">
+            <h5>About</h5>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#technology">Claude AI</a>
+            <a href="#cta">Get Started</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 GridSense. AI Event Intelligence Platform.</span>
+        <span class="footer-powered">Built with <span class="heart">♥</span> and Claude AI by Anthropic</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Score Modal -->
+  <div class="modal-overlay hidden" id="score-modal">
+    <div class="modal-card" id="modal-card">
+      <button class="modal-close" id="modal-close">✕</button>
+      <div class="modal-trophy">🏆</div>
+      <h3 class="modal-title">Score Submitted!</h3>
+      <div class="modal-score-circle">
+        <svg viewBox="0 0 100 100" class="score-ring">
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#1e293b" stroke-width="8"/>
+          <circle cx="50" cy="50" r="42" fill="none" stroke="#a855f7" stroke-width="8"
+            stroke-dasharray="263.9" id="score-ring-fill" stroke-dashoffset="263.9"
+            stroke-linecap="round" transform="rotate(-90 50 50)"/>
+        </svg>
+        <span class="score-number" id="modal-score">0</span>
+      </div>
+      <p class="modal-rank-text" id="modal-rank-text">Your entry is being judged by Claude AI...</p>
+      <div class="modal-breakdown" id="modal-breakdown">
+        <div class="breakdown-item">
+          <span>Creativity</span>
+          <div class="bd-bar-wrap"><div class="bd-bar" id="bd-creativity"></div></div>
+          <span class="bd-val" id="bd-creativity-val">—</span>
+        </div>
+        <div class="breakdown-item">
+          <span>Specificity</span>
+          <div class="bd-bar-wrap"><div class="bd-bar bd-blue" id="bd-specificity"></div></div>
+          <span class="bd-val" id="bd-specificity-val">—</span>
+        </div>
+        <div class="breakdown-item">
+          <span>Impact</span>
+          <div class="bd-bar-wrap"><div class="bd-bar bd-cyan" id="bd-impact"></div></div>
+          <span class="bd-val" id="bd-impact-val">—</span>
+        </div>
+      </div>
+      <button class="btn-modal-ok" id="modal-ok">View Leaderboard</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
