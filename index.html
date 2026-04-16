@@ -146,11 +146,9 @@
             <div class="dp-bar-wrap"><div class="dp-bar bar-blue" style="width:100%"></div></div>
             <span class="dp-metric-val blue">1,247</span>
           </div>
-          <div class="dp-alert">
-            <span class="alert-icon">⚠</span>
-            <div>
-              <strong>AI Alert:</strong> Gate A overflow detected<br/>
-              <small>Redirecting 340 attendees → Gate B &amp; C</small>
+          <div class="dp-alert-feed">
+            <div class="alert-ticker" id="alert-ticker">
+              <!-- JS injected -->
             </div>
           </div>
           <div class="dp-ai-badge">
@@ -381,13 +379,44 @@
         </div>
         <div class="module-visual">
           <div class="module-demo-window" id="safety-demo-window">
-            <div class="demo-label">AI Safety Analysis</div>
-            <div class="demo-input-mock">
-              <span class="dim">Report:</span> "People are pushing near Gate B entrance, I can't move!"
+            <div class="demo-header" style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid rgba(255,255,255,0.05); padding: 14px 18px;">
+              <div class="demo-label" style="border-bottom:none; padding:0;">AI Safety Analysis</div>
+              <button id="mic-btn" class="btn-mic" title="Click to Speak">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                <span>Live Voice</span>
+              </button>
             </div>
-            <div class="demo-output">
-              <div class="demo-json">
-                <pre><code id="safety-json">{
+            <div class="demo-input-mock">
+              <span id="voice-transcript"><span class="dim">Report:</span> "People are pushing near Gate B entrance, I can't move!"</span>
+            </div>
+            <div class="demo-split" style="display:flex;">
+              <div class="demo-map" style="flex:1; border-right: 1px solid rgba(255,255,255,0.05); padding: 18px; display:flex; align-items:center;">
+                 <svg viewBox="0 0 300 200" class="venue-map" id="venue-map" style="width:100%; height:auto;">
+                   <rect x="0" y="0" width="300" height="200" fill="rgba(255,255,255,0.01)" stroke="#3b82f6" stroke-opacity="0.1" stroke-width="1"/>
+                   <line x1="100" y1="0" x2="100" y2="200" class="map-grid-line"/>
+                   <line x1="200" y1="0" x2="200" y2="200" class="map-grid-line"/>
+                   <line x1="0" y1="100" x2="300" y2="100" class="map-grid-line"/>
+                   
+                   <g id="zone-stage-a" class="map-zone" transform="translate(10, 10)">
+                     <rect width="80" height="80" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)"/><text x="40" y="45" fill="var(--text-muted)" font-size="12" text-anchor="middle">Stage A</text><circle cx="40" cy="40" r="24" class="hotspot pulse-hotspot map-hide"/>
+                   </g>
+                   <g id="zone-stage-b" class="map-zone" transform="translate(210, 10)">
+                     <rect width="80" height="80" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)"/><text x="40" y="45" fill="var(--text-muted)" font-size="12" text-anchor="middle">Stage B</text><circle cx="40" cy="40" r="24" class="hotspot pulse-hotspot map-hide"/>
+                   </g>
+                   <g id="zone-gate-a" class="map-zone" transform="translate(10, 110)">
+                     <rect width="80" height="80" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)"/><text x="40" y="45" fill="var(--text-muted)" font-size="12" text-anchor="middle">Gate A</text><circle cx="40" cy="40" r="24" class="hotspot pulse-hotspot map-hide"/>
+                   </g>
+                   <g id="zone-gate-b" class="map-zone zone-critical" transform="translate(210, 110)">
+                     <rect width="80" height="80" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)"/><text x="40" y="45" fill="var(--text-muted)" font-size="12" text-anchor="middle">Gate B</text><circle cx="40" cy="40" r="24" class="hotspot pulse-hotspot"/>
+                   </g>
+                   <g id="zone-food" class="map-zone" transform="translate(110, 60)">
+                     <rect width="80" height="80" rx="4" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.05)"/><text x="40" y="45" fill="var(--text-muted)" font-size="12" text-anchor="middle">Food</text><circle cx="40" cy="40" r="24" class="hotspot pulse-hotspot map-hide"/>
+                   </g>
+                 </svg>
+              </div>
+              <div class="demo-output map-json-output" style="flex:1;">
+                <div class="demo-json" style="padding: 18px;">
+                  <pre><code id="safety-json">{
   "<span class="jk">module</span>": "<span class="jv">crowd_safety</span>",
   "<span class="jk">location</span>": "<span class="jv">Gate B Entrance</span>",
   "<span class="jk">severity</span>": <span class="jn">4</span>,
@@ -396,6 +425,7 @@
   "<span class="jk">action</span>": "<span class="jv">IMMEDIATE_REDIRECT</span>",
   "<span class="jk">alternate_route</span>": "<span class="jv">Gate A via North Path</span>"
 }</code></pre>
+                </div>
               </div>
             </div>
           </div>

@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initArena();
   initQueueAnimation();
   initDashboardAnimation();
+  initLiveAlerts();
+  initSafetyVoice();
 });
 
 // ════════════════════════════════════════
@@ -527,4 +529,175 @@ function escapeHtml(str) {
   const div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
   return div.innerHTML;
+}
+
+/* ════════════════════════════════════════
+   9. LIVE ALERT TICKER
+   ════════════════════════════════════════ */
+function initLiveAlerts() {
+  const ticker = document.getElementById('alert-ticker');
+  if (!ticker) return;
+
+  const alerts = [
+    { type: 'yellow', icon: '⚠', text: '14s ago &mdash; Gate A overflow detected' },
+    { type: 'green', icon: '🟢', text: '32s ago &mdash; Queue B normalized' },
+    { type: 'red', icon: '🔴', text: '1m ago &mdash; Panic signal: Stage Left' },
+    { type: 'yellow', icon: '⚠', text: '2m ago &mdash; High density near Food Court' }
+  ];
+
+  let currentIndex = 0;
+
+  function renderAlert() {
+    const alert = alerts[currentIndex];
+    const el = document.createElement('div');
+    el.className = `alert-item ${alert.type}`;
+    el.innerHTML = `<span>${alert.icon}</span> <span>${alert.text}</span>`;
+    
+    ticker.innerHTML = '';
+    ticker.appendChild(el);
+    
+    currentIndex = (currentIndex + 1) % alerts.length;
+  }
+
+  renderAlert();
+  
+  setInterval(() => {
+    ticker.style.transform = 'translateY(-10px)';
+    ticker.style.opacity = '0';
+    
+    setTimeout(() => {
+      renderAlert();
+      ticker.style.transform = 'translateY(10px)';
+      
+      requestAnimationFrame(() => {
+        ticker.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+        ticker.style.transform = 'translateY(0)';
+        ticker.style.opacity = '1';
+      });
+    }, 500);
+  }, 4000);
+}
+
+/* ════════════════════════════════════════
+   10. SAFETY VOICE API + MAP UPDATE
+   ════════════════════════════════════════ */
+function initSafetyVoice() {
+  const micBtn = document.getElementById('mic-btn');
+  const transcriptEl = document.getElementById('voice-transcript');
+  const safetyJson = document.getElementById('safety-json');
+  if (!micBtn || !transcriptEl || !safetyJson) return;
+
+  const fallbackPhrases = [
+    "Help, there's a huge crowd pushing at Stage A!",
+    "Food court is totally packed, can't move.",
+    "Gate B is clear now, but Gate A is blocked.",
+    "Someone fell near Stage B, we need help!"
+  ];
+
+  let isRecording = false;
+  let recognition = null;
+  
+  if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRec();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+
+    recognition.onresult = (event) => {
+      const text = event.results[0][0].transcript;
+      processVoiceReport(text);
+    };
+
+    recognition.onerror = (event) => {
+      console.warn('Speech recognition error', event.error);
+      simulateVoice();
+    };
+
+    recognition.onend = () => {
+      if (isRecording && recognition) {
+        // Did not process successfully via UI 
+      }
+    };
+  }
+
+  micBtn.addEventListener('click', () => {
+    if (isRecording) {
+      if (recognition) recognition.stop();
+      isRecording = false;
+      micBtn.classList.remove('recording');
+      micBtn.querySelector('span').textContent = 'Live Voice';
+      return;
+    }
+
+    isRecording = true;
+    micBtn.classList.add('recording');
+    micBtn.querySelector('span').textContent = 'Listening...';
+    transcriptEl.innerHTML = `<span class="dim">Report:</span> [Listening...]`;
+    
+    document.querySelectorAll('.map-zone').forEach(z => z.classList.remove('zone-critical'));
+    document.querySelectorAll('.hotspot').forEach(h => h.classList.add('map-hide'));
+
+    if (recognition) {
+      try { recognition.start(); }
+      catch(e) { simulateVoice(); }
+    } else {
+      simulateVoice();
+    }
+  });
+
+  function simulateVoice() {
+    setTimeout(() => {
+      if (!isRecording) return;
+      isRecording = false;
+      micBtn.classList.remove('recording');
+      micBtn.querySelector('span').textContent = 'Live Voice';
+      const fake = fallbackPhrases[Math.floor(Math.random() * fallbackPhrases.length)];
+      processVoiceReport(fake);
+    }, 2500);
+  }
+
+  function processVoiceReport(text) {
+    isRecording = false;
+    micBtn.classList.remove('recording');
+    micBtn.querySelector('span').textContent = 'Live Voice';
+    
+    transcriptEl.innerHTML = `<span class="dim">Report:</span> "${text}"`;
+    
+    let loc = "Unknown Zone";
+    let zoneId = null;
+    let severity = 2;
+    let action = "LOG_REPORT";
+
+    const t = text.toLowerCase();
+    if (t.includes('stage a')) { loc = "Stage A"; zoneId = "zone-stage-a"; }
+    else if (t.includes('stage b')) { loc = "Stage B"; zoneId = "zone-stage-b"; }
+    else if (t.includes('gate a')) { loc = "Gate A"; zoneId = "zone-gate-a"; }
+    else if (t.includes('gate b')) { loc = "Gate B"; zoneId = "zone-gate-b"; }
+    else if (t.includes('food')) { loc = "Food Court"; zoneId = "zone-food"; }
+    else { loc = "Main Concourse"; }
+
+    if (t.includes('pushing') || t.includes('help') || t.includes('fall') || t.includes('stampede') || t.includes('fight')) severity = 5;
+    else if (t.includes('packed') || t.includes('crowd') || t.includes('stuck') || t.includes('full')) severity = 4;
+
+    if (severity >= 4) action = "IMMEDIATE_REDIRECT";
+    if (severity === 5) action = "EVACUATE_ZONE";
+
+    if (zoneId) {
+      const zone = document.getElementById(zoneId);
+      if (zone) {
+        zone.classList.add('zone-critical');
+        zone.querySelector('.hotspot').classList.remove('map-hide');
+      }
+    }
+
+    safetyJson.innerHTML = `{
+  "<span class="jk">module</span>": "<span class="jv">crowd_safety</span>",
+  "<span class="jk">location</span>": "<span class="jv">${loc}</span>",
+  "<span class="jk">severity</span>": <span class="jn">${severity}</span>,
+  "<span class="jk">panic_score</span>": <span class="jn">${(severity * 0.18 + 0.05).toFixed(2)}</span>,
+  "<span class="jk">crowd_density</span>": "<span class="jv">${severity >= 4 ? 'critical' : 'elevated'}</span>",
+  "<span class="jk">action</span>": "<span class="jv">${action}</span>"
+}`;
+  }
 }

@@ -1402,6 +1402,69 @@ body {
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 
+/* ═══════════════════ Ticker & Map Additions ═══════════════════ */
+.dp-alert-feed {
+  overflow: hidden;
+  height: 50px;
+  position: relative;
+  background: rgba(239,68,68,0.05); /* slightly tinted for alert feel */
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: var(--radius-sm);
+  margin-bottom: 20px;
+}
+.alert-ticker {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  transition: transform 0.5s ease;
+}
+.alert-item {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  gap: 10px;
+}
+.alert-item.green { color: #4ade80; }
+.alert-item.red { color: #f87171; }
+.alert-item.yellow { color: #fbbf24; }
+
+.btn-mic {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  padding: 6px 12px;
+  border-radius: 99px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+.btn-mic:hover { background: rgba(239, 68, 68, 0.2); }
+.btn-mic.recording {
+  background: #ef4444; color: #fff;
+  border-color: #ef4444;
+  animation: pulse-mic 1s infinite;
+}
+
+.map-zone rect { transition: all 0.4s ease; transform-origin: center; }
+.zone-critical rect { stroke: #ef4444 !important; fill: rgba(239, 68, 68, 0.15) !important; filter: drop-shadow(0 0 8px rgba(239,68,68,0.5)); }
+.hotspot { fill: rgba(239,68,68,0.7); transform-origin: center; pointer-events: none; }
+.pulse-hotspot { animation: pulse-hotspot 2s infinite cubic-bezier(0.1, 0, 0.3, 1); }
+.map-hide { display: none; }
+
+@keyframes pulse-mic { 0%, 100% { opacity:1; transform: scale(1); } 50% { opacity:0.7; transform: scale(1.05); } }
+@keyframes pulse-hotspot {
+  0% { transform: scale(0.5); opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
 /* ═══════════════════ KEYFRAMES ═══════════════════ */
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes fadeInDown {
